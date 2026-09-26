@@ -1,4 +1,4 @@
-# TBD Workshop 1.
+# Deployment Guide
 
 ## Workshop goals
 1. Learn how to provision computing resources for running Big Data analyses using the Infrastructure as Code (IaC) approach.
@@ -8,7 +8,7 @@
 Jupyter notebooks and Dataproc services on GCP.
 5. Learn how to use Workload Identity Federation for a secure authentication from GitHub Actions
 to Google Cloud.
-![img.png](doc/figures/workload_id_federation.png)
+![img.png](../doc/figures/workload_id_federation.png)
 
 ## Prerequisites
 ### Software
@@ -59,7 +59,7 @@ Go to GCP Console → IAM & Admin → Quotas and request increase for:
 4. CI/CD (Github Actions setup using [Workload Identity Federation](https://cloud.google.com/blog/products/identity-security/enabling-keyless-authentication-from-github-actions))
 * Edit `env/backend.tfvars` file and set `bucket` variable with the Terraform state bucket
 * Edit `env/project.tfvars` file and set `project_name` and `iac_service_account` using the output from the `bootstrap` phase, e.g.:
-![img.png](doc/figures/bootstrap-output.png)
+![img.png](../doc/figures/bootstrap-output.png)
 * In the same `env/project.tfvars` file, set the GitHub variables for Airflow git-sync (DAG files are synced automatically from your repo):
 ```text
   github_org    = "your-github-username"
@@ -87,10 +87,10 @@ cd ..
 ```
 
 5. Use output variables for configuring Github Actions workflow: `.github/workflows/pull-request.yml`,e.g. :
-![img.png](doc/figures/workload-identity.png)
+![img.png](../doc/figures/workload-identity.png)
 Please do not edit and hardcode these values in a YAML but set the Github Actions secrets instead
 while preserving the secret names, i.e. `GCP_WORKLOAD_IDENTITY_PROVIDER_NAME` and `GCP_WORKLOAD_IDENTITY_SA_EMAIL`.
-![img.png](doc/figures/secrets.png)
+![img.png](../doc/figures/secrets.png)
 
 Also, set the `INFRACOST_API_KEY` secret. Register at infracost.io to obtain your API key.
 
@@ -102,7 +102,7 @@ pre-commit install
 
 7. Commit changes, push to a branch and open a PR to **YOUR** repository master branch.
 If you see a warning like this -- please enable the workflows:
-![img.png](doc/figures/workflow.png)
+![img.png](../doc/figures/workflow.png)
 ...and repush your changes!
 
 Once all Pull Requests checks **have passed** please merge your PR and wait until your release job finishes.

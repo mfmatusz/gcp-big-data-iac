@@ -1,6 +1,6 @@
 IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each work session. You can recreate infrastructure by creating new PR and merging it to master.
 
-![img.png](doc/figures/destroy.png)
+![img.png](../../doc/figures/destroy.png)
                                                                                                                                                                                                                                                                                                                                                                                   
 ## Phase 1 Exercise Overview
 
@@ -71,7 +71,7 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
     2. Create PR from this branch to **YOUR** master and merge it to make new release.
 
     ***place the screenshot from GA after successful application of release***
-![GA release](doc/figures/GA-release.png)
+![GA release](../../doc/figures/GA-release.png)
 
 5. Analyze terraform code. Play with terraform plan, terraform graph to investigate different modules.
 
@@ -258,7 +258,7 @@ resource "google_container_cluster" "airflow" {
 
 ```
    
-![Terraform graph](doc/figures/graph.svg)
+![Terraform graph](../../doc/figures/graph.svg)
 7. Reach YARN UI
 
    ***place the command you used for setting up the tunnel, the port and the screenshot of YARN UI here***
@@ -267,7 +267,7 @@ resource "google_container_cluster" "airflow" {
    ```
    > YARN UI is accessible inside WSL at `http://localhost:8088` (which propagates to Windows).
    
-![cluster](doc/figures/cluster.png)
+![cluster](../../doc/figures/cluster.png)
 
    Hint: the Dataproc cluster has `internal_ip_only = true`, so you need to use an IAP tunnel.
    See: `gcloud compute ssh` with `-- -L <local_port>:localhost:<remote_port>` and `--tunnel-through-iap` flag.
@@ -340,7 +340,7 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
    ```
 
    ***place the screenshot from infracost output here***
-![cost](doc/figures/cost.png)
+![cost](../../doc/figures/cost.png)
 9. Find and correct the error in spark-job.py
 
     After `terraform apply` completes, connect to the Airflow cluster:
@@ -360,7 +360,7 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
     a) In the Airflow UI (http://AIRFLOW_EXTERNAL_IP:8080, login: admin/admin), find the `dataproc_job` DAG, unpause it and trigger it manually.
 
     ***place a screenshot of the DAG in the Airflow UI***
-  ![dag fail](doc/figures/dag1.png)
+  ![dag fail](../../doc/figures/dag1.png)
     b) The DAG will fail. Examine the task logs in the Airflow UI to find the root cause.
 
     ***paste the relevant error message from the Airflow task log***
@@ -411,7 +411,7 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
     ```
 
     ***place a screenshot of the successful DAG run in Airflow UI***
-  ![dag success](doc/figures/dag2.png)
+  ![dag success](../../doc/figures/dag2.png)
 10. Create a BigQuery dataset and an external table using SQL
 
     Using the ORC data produced by the Spark job in task 9, create a BigQuery dataset and an external table.
@@ -425,7 +425,7 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
     ```sql
     SELECT * FROM shakespeare.main LIMIT 10;
     ```
-    ![sql](doc/figures/sql.png)
+    ![sql](../../doc/figures/sql.png)
     
     ***why does ORC not require a table schema?***
     
@@ -512,6 +512,6 @@ jobs:
 ***paste screenshot/log snippet confirming the auto-destroy ran***
 
 *(paste the screenshot of the Auto-Destroy run from the GH Actions tab after merging a Pull Request with the [CLEANUP] tag here)*
-![teardown](doc/figures/teardown.png)
+![teardown](../../doc/figures/teardown.png)
 ***write one sentence why scheduling cleanup helps in this workshop***
 Scheduling cleanup is crucial because Big Data components (like Dataproc and external Composer instances) are heavily billable per-hour, so forgetting to destroy resources manually could drain budget overnight.
